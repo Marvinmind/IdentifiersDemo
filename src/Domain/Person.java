@@ -10,6 +10,11 @@ public class Person {
     private static int ids=0;
     String firstName;
     String lastName;
+
+    public int getId() {
+        return id;
+    }
+
     int id;
 
 
@@ -26,7 +31,7 @@ public class Person {
         return ids;
     }
     public void printPerson(){
-        System.out.println("Vorname: "+firstName + "||" + "Nachname: " + lastName + "||" + "ID" + id);
+        System.out.println("Vorname: "+firstName + "||" + "Nachname: " + lastName + "||" + "ID: " + getId());
     }
     public Identifier getRoot() {
         return root;

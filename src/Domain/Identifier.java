@@ -33,12 +33,13 @@ public class Identifier {
                 Identifier checkedIdentifier = tempIdentifierIterator.next();
                 if(currentName == checkedIdentifier.getName()){
                     tempIdentifierList = checkedIdentifier.children;
+                    currentIdentifier = checkedIdentifier;
                     setFlag = true;
                     break;
                 }
             }
             if (setFlag == false){
-                Identifier createdChild = new Identifier(currentName, RandomStringUtils.random(8));
+                Identifier createdChild = new Identifier(currentName, RandomStringUtils.randomAlphanumeric(8));
                 createdChild.setParent(currentIdentifier);
                 currentIdentifier.children.add(createdChild);
                 System.out.println(createdChild.parent.getName());

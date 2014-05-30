@@ -21,11 +21,13 @@ public class Application {
         System.out.println();
         List<String> testList = Arrays.asList("ID1","P1","Pheno","Test");
         List<String> testList2 = Arrays.asList("Blubs");
+        List<String> testList3 = Arrays.asList("Blubs", "P2");
 
         Identifier root = personContainer.getPersons().next().getRoot();
 
         root.addChild(testList);
         root.addChild(testList2);
+        root.addChild(testList3);
         Identifier.printIdentifierTree(root);
     }
 }
