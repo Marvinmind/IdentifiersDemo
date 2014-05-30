@@ -30,9 +30,9 @@ public class Identifier {
             currentName = tempStringIterator.next();
             Iterator<Identifier> tempIdentifierIterator = tempIdentifierList.iterator();
             while(tempIdentifierIterator.hasNext()){
-                currentIdentifier = tempIdentifierIterator.next();
-                if(currentName == currentIdentifier.getName()){
-                    tempIdentifierList = currentIdentifier.children;
+                Identifier checkedIdentifier = tempIdentifierIterator.next();
+                if(currentName == checkedIdentifier.getName()){
+                    tempIdentifierList = checkedIdentifier.children;
                     setFlag = true;
                     break;
                 }
@@ -41,6 +41,8 @@ public class Identifier {
                 Identifier createdChild = new Identifier(currentName, RandomStringUtils.random(8));
                 createdChild.setParent(currentIdentifier);
                 currentIdentifier.children.add(createdChild);
+                System.out.println(createdChild.parent.getName());
+                tempIdentifierList = createdChild.children;
                 currentIdentifier = createdChild;
             }
         }
@@ -57,13 +59,16 @@ public class Identifier {
         Iterator<Identifier> tempIdentifierIterator = inputIdentifier.children.iterator();
         while (tempIdentifierIterator.hasNext()) {
             Identifier currentIdentifier = tempIdentifierIterator.next();
-            System.out.print("+");
-            System.out.println(currentIdentifier.getName() + ":" + currentIdentifier.getValue());
-            if (!currentIdentifier.children.isEmpty()) {
-                Iterator<Identifier> childrenIterator = currentIdentifier.children.iterator();
-                while (childrenIterator.hasNext())
-                    printIdentifierTree(childrenIterator.next());
+            //Find level of Identifier
+            int counter = 0;
+            Identifier countIdentifier = currentIdentifier;
+            while(countIdentifier.parent != null){
+                counter++;
+                countIdentifier = countIdentifier.parent;
             }
+            for(int i=0; i<counter; i++)
+                System.out.print("+");
+            printIdentifierTree(currentIdentifier);
         }
 
     }

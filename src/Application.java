@@ -19,8 +19,13 @@ public class Application {
             personIterator.next().printPerson();
         }
         System.out.println();
-        List<String> testList = Arrays.asList("ID1","P1","Pheno");
-        personContainer.getPersons().next().getRoot().addChild(testList);
-        Identifier.printIdentifierTree(personContainer.getPersons().next().getRoot());
+        List<String> testList = Arrays.asList("ID1","P1","Pheno","Test");
+        List<String> testList2 = Arrays.asList("Blubs");
+
+        Identifier root = personContainer.getPersons().next().getRoot();
+
+        root.addChild(testList);
+        root.addChild(testList2);
+        Identifier.printIdentifierTree(root);
     }
 }
