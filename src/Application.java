@@ -1,7 +1,10 @@
+import Domain.Identifier;
 import Domain.Person;
 import Domain.PersonContainer;
 
+import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * Created by Martin on 5/27/2014.
@@ -15,5 +18,9 @@ public class Application {
         while (personIterator.hasNext()) {
             personIterator.next().printPerson();
         }
+        System.out.println();
+        List<String> testList = Arrays.asList("ID1","P1","Pheno");
+        personContainer.getPersons().next().getRoot().addChild(testList);
+        Identifier.printIdentifierTree(personContainer.getPersons().next().getRoot());
     }
 }

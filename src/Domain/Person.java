@@ -11,6 +11,9 @@ public class Person {
     String firstName;
     String lastName;
     int id;
+
+
+
     Identifier root;
     public Person(String first, String last){
         firstName = first;
@@ -25,19 +28,10 @@ public class Person {
     public void printPerson(){
         System.out.println("Vorname: "+firstName + "||" + "Nachname: " + lastName + "||" + "ID" + id);
     }
-    public void addIdentifier(List<String> identList, String value){
-        if (identList.size() == 1){
-            this.root.addChild(new Identifier(identList.get(1), value));
-        }
-        if(identList.size() > 1){
-            Identifier tempIdent = root;
-            Iterator<String> identIterator = identList.iterator();
-            while(identIterator.hasNext()){
-                tempIdent = tempIdent.getChild(identIterator);
-            }
-        }
-
+    public Identifier getRoot() {
+        return root;
     }
+
 }
 
 

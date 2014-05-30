@@ -22,36 +22,50 @@ public class Identifier {
     public void addChild(List<String> nameList) {
         List<Identifier> tempIdentifierList = children;
         Iterator<String> tempStringIterator = nameList.iterator();
-        Identifier currentIdentifier = null;
+        Identifier currentIdentifier = this;
         String currentName = null;
         boolean setFlag = false;
-        for(int i=0; i<nameList.size()-1; i++){
+        while(tempStringIterator.hasNext()){
             setFlag = false;
             currentName = tempStringIterator.next();
             Iterator<Identifier> tempIdentifierIterator = tempIdentifierList.iterator();
             while(tempIdentifierIterator.hasNext()){
                 currentIdentifier = tempIdentifierIterator.next();
-                if(currentName == currentIdentifier.name){
+                if(currentName == currentIdentifier.getName()){
                     tempIdentifierList = currentIdentifier.children;
                     setFlag = true;
                     break;
                 }
             }
             if (setFlag == false){
-            currentIdentifier.children.add(new Identifier(currentName, RandomStringUtils.random(8)));
+                Identifier createdChild = new Identifier(currentName, RandomStringUtils.random(8));
+                createdChild.setParent(currentIdentifier);
+                currentIdentifier.children.add(createdChild);
+                currentIdentifier = createdChild;
             }
         }
-        if(setFlag == true)
-        currentIdentifier.children.add(new Identifier(currentName, RandomStringUtils.random(8));
+
     }
 
-    public static Identifier getChild(Identifier inputIdentifier, String name) {
-        Iterator<Identifier> tempIterator = inputIdentifier.getIdentifiers().iterator();
-        while (tempIterator.hasNext()) {
-            if (tempIterator.next().getName {
-
+    /**
+     * Prints a Tree structure of the provided Identifier with all its sub identifiers
+     *
+     * @param inputIdentifier
+     */
+    public static void printIdentifierTree(Identifier inputIdentifier) {
+        System.out.println("Name: " + inputIdentifier.name + " Value: " + inputIdentifier.value);
+        Iterator<Identifier> tempIdentifierIterator = inputIdentifier.children.iterator();
+        while (tempIdentifierIterator.hasNext()) {
+            Identifier currentIdentifier = tempIdentifierIterator.next();
+            System.out.print("+");
+            System.out.println(currentIdentifier.getName() + ":" + currentIdentifier.getValue());
+            if (!currentIdentifier.children.isEmpty()) {
+                Iterator<Identifier> childrenIterator = currentIdentifier.children.iterator();
+                while (childrenIterator.hasNext())
+                    printIdentifierTree(childrenIterator.next());
             }
         }
+
     }
 
     public void setParent(Identifier parent) {
@@ -64,5 +78,9 @@ public class Identifier {
 
     public List<Identifier> getIdentifiers() {
         return children;
+    }
+
+    public String getValue() {
+        return value;
     }
 }

@@ -11,8 +11,7 @@ import java.util.List;
 public class PersonContainer {
     List<Person> persons = new ArrayList<Person>();
     public PersonContainer(){
-        Person identPerson = new Person("Martin", "Schwarzmaier");
-        identPerson.
+        persons.add(new Person("Martin", "Schwarzmaier"));
         persons.add(new Person("Martin", "Schwarzmaier"));
         persons.add(new Person("Ulla", "Wege"));
         persons.add(new Person("Florian", "Pircher"));
