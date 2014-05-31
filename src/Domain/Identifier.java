@@ -19,7 +19,9 @@ public class Identifier {
         this.value = value;
     }
     //Braucht Unterstützung für Algorithmen
-    public void addChild(List<String> nameList) {
+    public List<String> addChild(List<String> nameList) {
+        List<String> returnNames= new ArrayList<String>();
+
         List<Identifier> tempIdentifierList = children;
         Iterator<String> tempStringIterator = nameList.iterator();
         Identifier currentIdentifier = this;
@@ -39,15 +41,16 @@ public class Identifier {
                 }
             }
             if (setFlag == false){
-                Identifier createdChild = new Identifier(currentName, RandomStringUtils.randomAlphanumeric(8));
+                String returnName = RandomStringUtils.randomAlphanumeric(8);
+                returnNames.add(returnName);
+                Identifier createdChild = new Identifier(currentName,returnName );
                 createdChild.setParent(currentIdentifier);
                 currentIdentifier.children.add(createdChild);
-                System.out.println(createdChild.parent.getName());
                 tempIdentifierList = createdChild.children;
                 currentIdentifier = createdChild;
             }
         }
-
+    return returnNames;
     }
 
     /**
@@ -72,6 +75,16 @@ public class Identifier {
             printIdentifierTree(currentIdentifier);
         }
 
+    }
+    public Identifier getIdentifierByName(String inputName){
+        Iterator<Identifier> childrenIterator = children.iterator();
+        while(childrenIterator.hasNext()){
+            Identifier currentIdentifier = childrenIterator.next();
+            if(currentIdentifier.getName()== inputName){
+                return currentIdentifier;
+            }
+        }
+        return null;
     }
 
     public void setParent(Identifier parent) {
